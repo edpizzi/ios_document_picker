@@ -21,8 +21,9 @@ class IosDocumentPicker {
 
   /// Move (or copy) file from a temporary path to the chosen location.
   Future<IosDocumentPickerPath?> exportFile(String fileUrl,
-      {String? directoryUrl}) async {
-    final results = await exportFiles([fileUrl], directoryUrl: directoryUrl);
+      {String? directoryUrl, bool asCopy = false}) async {
+    final results = await exportFiles([fileUrl],
+        directoryUrl: directoryUrl, asCopy: asCopy);
     if (results == null) return null;
     assert(results.length == 1);
     return results.first;
@@ -30,11 +31,12 @@ class IosDocumentPicker {
 
   /// Move (or copy) files from a temporary path to the chosen location.
   Future<List<IosDocumentPickerPath>?> exportFiles(List<String> fileUrls,
-      {String? directoryUrl}) {
+      {String? directoryUrl, bool asCopy = false}) {
     return IosDocumentPickerPlatform.instance.pick(
       IosDocumentPickerType.file, // ignored
       forExporting: fileUrls.map(_cleanupFileUrl).toList(),
       directoryUrl: directoryUrl,
+      asCopy: asCopy,
     );
   }
 

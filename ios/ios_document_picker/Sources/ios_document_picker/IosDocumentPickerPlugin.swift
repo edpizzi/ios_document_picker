@@ -28,12 +28,13 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       let allowedUtiTypes = args["allowedUtiTypes"] as? [String]
       let forExportingStr = args["forExporting"] as? [String] ?? []
       let forExporting = forExportingStr.map{ URL(string: $0)}.compactMap({ $0 });
+      let asCopy = args["asCopy"] as? Bool ?? false
       let directoryUrlStr = args["directoryUrl"] as? String
       let utTypes = allowedUtiTypes?.compactMap { UTType($0) }
 
       let documentPicker: UIDocumentPickerViewController;
       if (!forExporting.isEmpty) {
-        documentPicker = UIDocumentPickerViewController(forExporting: forExporting, asCopy: false)
+        documentPicker = UIDocumentPickerViewController(forExporting: forExporting, asCopy: asCopy)
       } else {
         documentPicker = UIDocumentPickerViewController(
           forOpeningContentTypes: utTypes ?? (mode == .folder ? [UTType.folder] : [UTType.data]))

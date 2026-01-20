@@ -17,6 +17,7 @@ class MethodChannelIosDocumentPicker extends IosDocumentPickerPlatform {
     List<String>? allowedUtiTypes,
     List<String>? forExporting,
     String? directoryUrl,
+    bool asCopy = false,
   }) async {
     var maps =
         await methodChannel.invokeListMethod<Map<dynamic, dynamic>>('pick', {
@@ -25,6 +26,7 @@ class MethodChannelIosDocumentPicker extends IosDocumentPickerPlatform {
       'forExporting': forExporting,
       'allowedUtiTypes': allowedUtiTypes,
       'directoryUrl': directoryUrl,
+      'asCopy': asCopy,
     });
     if (maps == null) {
       return null;

@@ -30,6 +30,7 @@ abstract class IosDocumentPickerPlatform extends PlatformInterface {
     List<String>? allowedUtiTypes,
     List<String>? forExporting,
     String? directoryUrl,
+    bool asCopy = false,
   }) {
     throw UnimplementedError('pick() has not been implemented.');
   }
